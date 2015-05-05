@@ -34,7 +34,35 @@ function loadGitHub(user, project){
 }
 
 function loadGitHub(user, project, branch){
-  loadURL("http://raw.githubusercontent.com/"+user+"/"+project+"/"+branch+"/README.md");
+  gh3It(user, project, branch);
+}
+
+function gh3It(user, project, branch){
+var user = new Gh3.User(user);
+var project = new Gh3.Repository(project, user);
+
+project.fetch(function (err, res) {
+    if(err) { throw "outch ..." }
+
+    project.fetchBranches(function (err, res) {
+        if(err) { throw "outch ..." }
+
+        var master = project.getBranchByName(branch);
+
+master.fetchContents(function (err, res) {
+    if(err) { throw "outch ..." }
+
+    var myfile = master.getFileByName("README.md");
+
+    myfile.fetchContent(function (err, res) {
+        if(err) { throw "outch ..." }
+        loadMarkdown(marked(myfile.getRawContent()));
+    });
+
+});
+
+    })
+});
 }
 
 function loadURL(url){
