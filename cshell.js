@@ -34,7 +34,7 @@ function loadGitHub(user, project){
 }
 
 function loadGitHub(user, project, branch){
-  loadURL("https://raw.githubusercontent.com/"+user+"/"+project+"/"+branch+"/README.md");
+  loadURL("http://raw.githubusercontent.com/"+user+"/"+project+"/"+branch+"/README.md");
 }
 
 function loadURL(url){
