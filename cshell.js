@@ -3,9 +3,30 @@
  * Copyleft 2015, Jadon "Phase" Fowler (MIT License)
  * https://github.com/phase/cshell
  */
-function loadMarkdown(url){
-  var md = loadXHR(url);
-  console.log(md)
+function loadMarkdown(md){
+  //Create content div above links
+  var content = document.createElement("div");
+  content.setAttribute("id", "content");
+  var cshell = document.getElementById("cshell");
+  var parent = cshell.parentNode;
+  parent.insertBefore(content, cshell);
+  content.innerHTML = marked(md);
+  
+  //Create Bootswatch link
+  var theme = document.createElement("link");
+  theme.setAttribute("rel", "stylesheet");
+  theme.setAttribute("type", "text/css");
+  theme.setAttribute("href", "http://bootswatch.com/united/bootstrap.min.css");
+  parent.insertBefore(theme, content);
+  
+  //Custom CSS to make it look half-decent
+  document.head.innerHTML = 
+  "<style>\
+  #content {\
+  margin-left: 10%\
+  margin-right: 10%\
+  }\
+  </style>";
 }
 
 function loadXHR(url){
@@ -20,7 +41,7 @@ function loadXHR(url){
 	  return xhr.responseText;
 	}
   }
-  xhr.open("GET", "http://whateverorigin.org/get?url=" + encodeURIComponent(url) + "&callback=?", true);
+  xhr.open("GET", "http://whateverorigin.org/get?url=" + url + "&callback=?", true);
   xhr.send();
 }
 
