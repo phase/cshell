@@ -53,7 +53,7 @@ function loadXHR(url){
 	  return xhr.responseText;
 	}
   }
-  xhr.open("GET", "http://whateverorigin.org/get?url=" + url + "&callback=?", true);
+  xhr.open("GET", "http://whateverorigin.org/get?url=" + encodeURIComponent(url) + "&callback=?", true);
   xhr.send();
 }
 
