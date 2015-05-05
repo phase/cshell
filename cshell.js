@@ -54,7 +54,7 @@ function gh3It(user, project, branch){
 
         myfile.fetchContent(function (err, res) {
           if(err) { throw "outch ..." }
-          loadMarkdown(marked(myfile.getRawContent()));
+          loadMarkdown(myfile.getRawContent());
         });
       });
     });
