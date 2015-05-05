@@ -37,9 +37,9 @@ function loadGitHub(user, project, branch){
   gh3It(user, project, branch);
 }
 
-function gh3It(user, project, branch){
-  var user = new Gh3.User(user);
-  var project = new Gh3.Repository(project, user);
+function gh3It(u, p, branch){
+  var user = new Gh3.User(u);
+  var project = new Gh3.Repository(p, u);
 
   project.fetch(function (err, res) {
     if(err) { throw "outch ..." }
