@@ -38,7 +38,9 @@ function loadGitHub(user, project, branch){
 }
 
 function loadURL(url){
-  loadMarkdown(loadXHR(url));
+  jsonp('http://www.helloword.com', function(data) {
+    loadMarkdown(data);
+  });
 }
 
 function loadXHR(url){
@@ -55,6 +57,19 @@ function loadXHR(url){
   }
   xhr.open("GET", "http://whateverorigin.org/get?url=" + encodeURIComponent(url) + "&callback=?", true);
   xhr.send();
+}
+
+function jsonp(url, callback) {
+    var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+    window[callbackName] = function(data) {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        callback(data);
+    };
+
+    var script = document.createElement('script');
+    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
+    document.body.appendChild(script);
 }
 
 /**
