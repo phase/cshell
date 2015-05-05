@@ -23,10 +23,14 @@ function loadMarkdown(md){
   document.head.innerHTML = 
   "<style>\
   #content {\
-  margin-left: 10%\
-  margin-right: 10%\
+    margin-left: 10%\
+    margin-right: 10%\
   }\
   </style>";
+}
+
+function loadGitHub(user, project){
+  loadGitHub(user, project, "master");
 }
 
 function loadGitHub(user, project, branch){
