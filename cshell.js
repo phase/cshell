@@ -50,7 +50,7 @@ function loadXHR(url){
   }
   xhr.onreadystatechange = function(){
     if(xhr.readyState == 4 && xhr.status == 200){
-	  return xhr.responseText;
+	  return (JSON.parse(xhr.responseText)).contents;
 	}
   }
   xhr.open("GET", "http://whateverorigin.org/get?url=" + encodeURIComponent(url) + "&callback=?", true);
