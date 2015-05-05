@@ -37,7 +37,7 @@ function loadGitHub(user, project, branch){
   gh3It(user, project, branch);
 }
 
-function gh3It(u, p, branch){
+function gh3It(u, p, b){
   var user = new Gh3.User(u);
   var project = new Gh3.Repository(p, u);
 
@@ -46,11 +46,11 @@ function gh3It(u, p, branch){
 
     project.fetchBranches(function (err, res) {
       if(err) { throw "outch ..." }
-      var master = project.getBranchByName(branch);
+      var branch = project.getBranchByName(b);
       
-      master.fetchContents(function (err, res) {
+      branch.fetchContents(function (err, res) {
         if(err) { throw "outch ..." }
-        var myfile = master.getFileByName("README.md");
+        var myfile = branch.getFileByName("README.md");
 
         myfile.fetchContent(function (err, res) {
           if(err) { throw "outch ..." }
@@ -62,7 +62,7 @@ function gh3It(u, p, branch){
 }
 
 function loadURL(url){
-  jsonp('http://www.helloword.com', function(data) {
+  jsonp(url, function(data) {
     loadMarkdown(data);
   });
 }
