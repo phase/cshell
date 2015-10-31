@@ -16,7 +16,7 @@ function loadMarkdown(md){
   var theme = document.createElement("link");
   theme.setAttribute("rel", "stylesheet");
   theme.setAttribute("type", "text/css");
-  theme.setAttribute("href", "http://bootswatch.com/united/bootstrap.min.css");
+  theme.setAttribute("href", "http://bootswatch.com/yeti/bootstrap.min.css");
   parent.insertBefore(theme, content);
   
   //Custom CSS to make it look half-decent
